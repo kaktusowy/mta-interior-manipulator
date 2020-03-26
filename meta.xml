@@ -1,0 +1,20 @@
+<meta>
+    <info author="Kaktusowy" version="1.0" />
+    <oop>true</oop>
+    
+    <script src="tool/util/mathsS.lua" type="server" />
+
+    <script src="tool/gui/GuiListenerC.lua" type="client" />
+    <script src="tool/gui/GuiC.lua" type="client" />
+
+    <script src="tool/undo/undoC.lua" type="client" />
+    <script src="tool/undo/undoS.lua" type="server" />
+
+    <script src="tool/move/moveC.lua" type="client" />
+    <script src="tool/move/moveS.lua" type="server" />
+
+    <script src="tool/rotate/rotateC.lua" type="client" />
+    <script src="tool/rotate/rotateS.lua" type="server" />
+
+    <script src="mainC.lua" type="client" />
+</meta>
