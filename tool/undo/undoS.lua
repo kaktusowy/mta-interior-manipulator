@@ -6,20 +6,22 @@ function pushAction(action)
     table.insert(actionHistory, action);
 end
 
-function pushMoveAction(x, y, z)
+function pushMoveAction(x, y, z, dim)
     local action = {};
     action.type = "move";
     action.x = x;
     action.y = y;
     action.z = z;
+    action.dim = dim;
 
     pushAction(action);
 end
 
-function pushRotateAction(angle)
+function pushRotateAction(angle, dim)
     local action = {};
     action.type = "rotate";
     action.angle = angle;
+    action.dim = dim;
 
     pushAction(action);
 end
@@ -39,9 +41,9 @@ function onActionUndo()
         local action = actionHistory[size];
         if action then
             if action.type == "move" then
-                triggerEvent("onInteriorRelocateMove", getRootElement(), -action.x, -action.y, -action.z, false, true);
+                triggerEvent("onInteriorRelocateMove", getRootElement(), -action.x, -action.y, -action.z, false, true, action.dim);
             else
-                triggerEvent("onInteriorRelocateRotate", getRootElement(), -action.angle, true);
+                triggerEvent("onInteriorRelocateRotate", getRootElement(), -action.angle, true, action.dim);
             end
             table.remove(actionHistory, size);
         end

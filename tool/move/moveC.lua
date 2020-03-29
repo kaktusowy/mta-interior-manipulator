@@ -1,6 +1,6 @@
 
 function moveInterior(x, y, z, toPosition)
-    triggerServerEvent("onInteriorRelocateMove", getLocalPlayer(), x, y, z, toPosition, false);
+    triggerServerEvent("onInteriorRelocateMove", getLocalPlayer(), x, y, z, toPosition, false, getLocalPlayer():getDimension());
 end
 
 function moveInteriorToPosition(position)

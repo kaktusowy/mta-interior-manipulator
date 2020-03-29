@@ -1,5 +1,5 @@
 
-function onInteriorRelocateRotate(angle, undo)
+function onInteriorRelocateRotate(angle, undo, dimension)
     local editorResource = getResourceFromName("editor_main");
     if not editorResource then
         outputDebugString("MTA Map Editor is required to use this addon.");
@@ -9,18 +9,20 @@ function onInteriorRelocateRotate(angle, undo)
     local rootElement = getResourceRootElement(editorResource);
     if rootElement and isElement(rootElement) then
         local objects = getElementsByType("object", rootElement);
-        local midpointX, midpointY = Maths.calculateInteriorMidpoint(objects);
+        local midpointX, midpointY = Maths.calculateInteriorMidpoint(objects, dimension);
         if not undo then
-            pushRotateAction(angle);
+            pushRotateAction(angle, dimension);
         end
         for i, object in ipairs(objects) do
-            local pos = object:getPosition();
-            local rx, ry, rz = exports["edf"]:edfGetElementRotation(object);
+            if object:getDimension() == dimension then
+                local pos = object:getPosition();
+                local rx, ry, rz = exports["edf"]:edfGetElementRotation(object);
 
-            local x, y = Maths.calculateRotatingObjectPosition(object, angle, midpointX, midpointY);
+                local x, y = Maths.calculateRotatingObjectPosition(object, angle, midpointX, midpointY);
 
-            exports["edf"]:edfSetElementRotation(object, rx, ry, rz + angle);
-            exports["edf"]:edfSetElementPosition(object, x, y, pos.z);
+                exports["edf"]:edfSetElementRotation(object, rx, ry, rz + angle);
+                exports["edf"]:edfSetElementPosition(object, x, y, pos.z);
+            end
         end
     end
 end

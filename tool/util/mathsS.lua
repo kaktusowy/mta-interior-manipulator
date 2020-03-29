@@ -1,30 +1,32 @@
 Maths = {};
 
-function Maths.calculateInteriorMidpoint(objects)
+function Maths.calculateInteriorMidpoint(objects, dimension)
     local x1, x2, y1, y2, z1, z2;
 
     for i, object in ipairs(objects) do
-        local position = object:getPosition();
-            
-        if not x1 or position.x < x1 then
-            x1 = position.x;
-        end
-        if not x2 or position.x > x2 then
-            x2 = position.x;
-        end
+        if object:getDimension() == dimension then
+            local position = object:getPosition();
+                
+            if not x1 or position.x < x1 then
+                x1 = position.x;
+            end
+            if not x2 or position.x > x2 then
+                x2 = position.x;
+            end
 
-        if not y1 or position.y < y1 then
-            y1 = position.y;
-        end
-        if not y2 or position.y > y2 then
-            y2 = position.y;
-        end
+            if not y1 or position.y < y1 then
+                y1 = position.y;
+            end
+            if not y2 or position.y > y2 then
+                y2 = position.y;
+            end
 
-        if not z1 or position.z < z1 then
-            z1 = position.z;
-        end
-        if not z2 or position.z > z2 then
-            z2 = position.z;
+            if not z1 or position.z < z1 then
+                z1 = position.z;
+            end
+            if not z2 or position.z > z2 then
+                z2 = position.z;
+            end
         end
     end
 
